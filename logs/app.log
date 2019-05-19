@@ -123,3 +123,43 @@
   errmsg:
    'E11000 duplicate key error collection: bookingManager.users index: email_1 dup key: { : "sainaledava@gmail.com" }',
   [Symbol(mongoErrorContextSymbol)]: {} }
+[2019-05-19T11:54:25.578] [DEBUG] main - app started
+[2019-05-19T11:55:28.193] [DEBUG] main - app started
+[2019-05-19T11:56:02.305] [DEBUG] userRouter - getting user details sainaledava@gmail.com
+[2019-05-19T11:57:58.301] [DEBUG] userRouter - getting user details undefined
+[2019-05-19T12:04:32.342] [DEBUG] userRouter - getting user details sainaledava@gmail.com
+[2019-05-19T12:05:00.723] [DEBUG] groupRouter - adding group { name: 'Badminton',
+  members: [ '5ce05f1052cdec067a03e346' ],
+  createdBy: '5ce05f1052cdec067a03e346' }
+[2019-05-19T12:05:00.764] [DEBUG] groupRouter - new group saved undefined
+[2019-05-19T12:06:55.111] [DEBUG] groupRouter - getting groups for group 5ce05f1052cdec067a03e346
+[2019-05-19T12:08:16.996] [DEBUG] main - app started
+[2019-05-19T12:08:23.037] [DEBUG] groupRouter - getting groups for group 5ce05f1052cdec067a03e346
+[2019-05-19T17:17:13.927] [DEBUG] main - app started
+[2019-05-19T17:17:34.755] [DEBUG] main - app started
+[2019-05-19T17:21:04.971] [DEBUG] groupRouter - getting groups for group 5ce05f1052cdec067a03e346
+[2019-05-19T17:24:10.497] [DEBUG] bookingRouter - adding booking { name: 'Badminton',
+  startTime: '2019-05-20 11:00:00',
+  endTime: '2019-05-20 12:00:00',
+  venue: 'Hougang Sports Hall',
+  attendees: '5ce0d5ec2d6fbb23ed646ee1',
+  group: '5ce0d5ec2d6fbb23ed646ee1',
+  active: 'true',
+  attachementPath: 'test',
+  createdBy: '5ce05f1052cdec067a03e346' }
+[2019-05-19T17:24:10.521] [DEBUG] bookingRouter - new booking saved
+[2019-05-19T17:25:25.176] [DEBUG] bookingRouter - getting bookings for booking 5ce0d5ec2d6fbb23ed646ee1
+[2019-05-19T17:26:22.790] [DEBUG] main - app started
+[2019-05-19T17:26:28.358] [DEBUG] bookingRouter - getting bookings for group 5ce0d5ec2d6fbb23ed646ee1
+[2019-05-19T17:28:45.059] [DEBUG] bookingRouter - updating booking { _id: '5ce120ba9fbe6931ecd547d0',
+  name: 'Badminton',
+  startTime: '2019-05-20 11:00:00',
+  endTime: '2019-05-20 12:00:00',
+  venue: 'Bishan ActiveSG Sports Hall',
+  attendees: '5ce0d5ec2d6fbb23ed646ee1',
+  group: '5ce0d5ec2d6fbb23ed646ee1',
+  active: 'true',
+  attachementPath: 'test',
+  createdBy: '5ce05f1052cdec067a03e346' }
+[2019-05-19T17:28:45.068] [DEBUG] bookingRouter - new booking updated
+[2019-05-19T17:28:49.986] [DEBUG] bookingRouter - getting bookings for group 5ce0d5ec2d6fbb23ed646ee1
