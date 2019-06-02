@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var groupsRouter = require('./routes/groups');
 var bookingRouter = require('./routes/booking');
+var cors = require('cors');
 
 var logger = require('./LogsUtil').getLogger('main');
 
@@ -29,7 +30,7 @@ var accessLogStream = rfs('access.log', {
 app.use(morgan('combined', { stream: accessLogStream }));
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://127.0.0.1/bookingManager';
+var mongoDB = 'mongodb://127.0.0.1/devBookingManagerDB';
 
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 var db = mongoose.connection;
@@ -44,6 +45,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 logger.debug("app started");
 
@@ -59,6 +61,7 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+logger.error("error occured", err);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -66,11 +69,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-
-process.on('uncaughtException', function (error) {
-  logger.debug("Uncaught Exception");
-  logger.debug(error.stack);
 });
 
 module.exports = app;

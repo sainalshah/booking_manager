@@ -13,7 +13,7 @@ var bookingSchema = new Schema({
   group: {type: Schema.ObjectId, ref: 'Group'},
   active: Boolean,
   attachementPath: String,
-  createdBy: String
+  createdBy: {type: Schema.ObjectId, ref: 'User'}
 });
 
 // Compile model from schema

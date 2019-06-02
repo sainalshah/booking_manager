@@ -7,19 +7,22 @@ var logger = require('../LogsUtil').getLogger('groupRouter');
 
 /* GET groups listing for a particular user. */
 router.get('/', function(req, res, next) {
-  logger.debug('getting groups for group',req.body.userId );
+  logger.debug('getting groups for group',req.query.userId );
   Group
   .find({
     'members': { $in: [
-      mongoose.Types.ObjectId(req.body.userId)
+      mongoose.Types.ObjectId(req.query.userId)
     ]}
   })
+  .populate('createdBy')
+  .populate('members')
   .exec(function (err, groups) {
     if (err){
       logger.debug("error getting group", err);
       res.json({msg : "error"});
     } else {
-      res.json({groups: groups});
+      logger.debug("returning groups", groups);
+      res.json(groups);
     }
   });
 });

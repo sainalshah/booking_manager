@@ -6,9 +6,9 @@ var logger = require('../LogsUtil').getLogger('userRouter');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  logger.debug('getting user details',req.body.email );
+  logger.debug('getting user details',req.query.email );
   User
-  .find({ email : req.body.email })
+  .find({ email : req.query.email })
   .exec(function (err, user) {
     if (err){
       logger.debug("error getting user", err);
@@ -24,13 +24,30 @@ router.post('/', function(req, res, next) {
   logger.debug("registering user", req.body)
   req.body.providerId = req.body.id;
   var newUser = new User(req.body);
-  newUser.save(function (err) {
+  newUser.save(function (err, userObj) {
     if (err) {
-      logger.debug("error saving user", err);
-      res.json({msg : "error"});
+      logger.error(err);
+      //if user exists
+      if(err.code == 11000){
+        logger.debug('user exists',req.body.email );
+        User
+        .findOne({ email : req.body.email })
+        .exec(function (err, user) {
+          if (err){
+            logger.debug("error getting user", err);
+            res.json({msg : "error"});
+          } else {
+            logger.debug("returning user", user);
+            res.json(user);
+          }
+        });
+      } else {
+        logger.debug("error saving user", err);
+        res.json({msg : "error"});
+      }
     } else {
       logger.debug("new user saved", req.body.email );
-      res.json({msg : "success"});
+      res.json(userObj);
     }
   });
 });
