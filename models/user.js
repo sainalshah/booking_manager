@@ -5,16 +5,16 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-  authToken: String,
+  authToken: {type: String, required: true },
   email: {
     type: String,
-    unique: true,
+    unique: true, required: true 
   },
-  providerId: String,
-  lastName: String,
-  firstName: String,
-  photoUrl: String,
-  provider: String
+  providerId: {type: String, required: true },
+  lastName: {type: String, required: true },
+  firstName: {type: String, required: true },
+  photoUrl: {type: String, required: true },
+  provider: {type: String, required: true }
 });
 
 // Compile model from schema

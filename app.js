@@ -30,7 +30,7 @@ var accessLogStream = rfs('access.log', {
 app.use(morgan('combined', { stream: accessLogStream }));
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://127.0.0.1/devBookingManagerDB';
+var mongoDB = 'mongodb://127.0.0.1/devBookingManagerDB2';
 
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 var db = mongoose.connection;

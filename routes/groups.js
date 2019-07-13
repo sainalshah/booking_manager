@@ -7,7 +7,7 @@ var logger = require('../LogsUtil').getLogger('groupRouter');
 
 /* GET groups listing for a particular user. */
 router.get('/', function(req, res, next) {
-  logger.debug('getting groups for group',req.query.userId );
+  logger.debug('getting groups for user',req.query.userId );
   Group
   .find({
     'members': { $in: [
@@ -27,6 +27,27 @@ router.get('/', function(req, res, next) {
   });
 });
 
+
+
+/* GET groups listing for a particular user. */
+  router.get('/byGroupId', function(req, res, next) {
+  logger.debug('getting groups for user',req.query.groupId );
+  Group
+  .findOne({
+    '_id': req.query.groupId
+  })
+  .populate('createdBy')
+  .populate('members')
+  .exec(function (err, groups) {
+    if (err){
+      logger.debug("error getting group", err);
+      res.json({msg : "error"});
+    } else {
+      logger.debug("returning groups", groups);
+      res.json(groups);
+    }
+  });
+});
 
 router.post('/', function(req, res, next) {
   logger.debug("adding group", req.body);

@@ -6,9 +6,9 @@ var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var groupSchema = new Schema({
-  name: String,
-  members: [{type: ObjectId, ref: 'User'}],
-  createdBy: {type: ObjectId, ref: 'User'}
+  name: {type: String, required: true },
+  members: [{type: ObjectId, required: true, ref: 'User'}],
+  createdBy: {type: ObjectId, required: true, ref: 'User'}
 });
 
 // Compile model from schema

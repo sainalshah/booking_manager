@@ -7,19 +7,22 @@ var logger = require('../LogsUtil').getLogger('bookingRouter');
 
 /* GET bookings listing for a particular group. */
 router.get('/', function(req, res, next) {
-  logger.debug('getting bookings for group',req.body.groupId );
+  logger.debug('getting bookings for group',req.query.groupId );
   Booking
   .find({
     'group': { $in: [
-      mongoose.Types.ObjectId(req.body.groupId)
+      mongoose.Types.ObjectId(req.query.groupId)
     ]}
   })
+  .populate('createdBy')
+  .populate('attendees')
   .exec(function (err, bookings) {
     if (err){
       logger.debug("error getting booking", err);
       res.json({msg : "error"});
     } else {
-      res.json({bookings: bookings});
+      logger.debug("returning bookings", bookings);
+      res.json(bookings);
     }
   });
 });
@@ -28,6 +31,8 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   logger.debug("adding booking", req.body);
   var newBooking = new Booking(req.body);
+  newBooking.attendees = req.body.attendeeList;
+  newBooking.active = true;
   newBooking.save(function (err) {
     if (err) {
       logger.debug("error saving booking", err);
