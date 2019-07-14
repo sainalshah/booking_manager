@@ -12,5 +12,6 @@ export class Booking {
   group: string;
   active: boolean;
   attachementPath: string;
-  createdBy: string
+  createdBy: string;
+  displayDateTime: String;
 }
