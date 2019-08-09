@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   title = 'Booking Manager';
 
   private user: SocialUser;
-  private loggedIn: boolean;
+  public loggedIn: boolean;
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe((user) => {
