@@ -3,6 +3,7 @@ import { environment } from '../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Booking } from './booking';
 import { Observable, throwError } from "rxjs";
+import * as dateformat from 'dateformat'; 
 
 const API_URL = environment.apiUrl;
 
@@ -15,20 +16,20 @@ export class BookingService {
 
   }
 
+  public async getBooking(bookingId: string): Promise<Booking> {
+
+    const  params = new  HttpParams().set('bookingId', bookingId)
+    let booking = await this.http.get<Booking>( API_URL + '/booking/byBookingId', {params}).toPromise();
+
+    return booking;
+  }
   // API: GET /groups
   public async getAllBookings(groupId: string): Promise<[Booking]> {
     // will use this.http.get()
     const  params = new  HttpParams().set('groupId', groupId)
     let bookings = await this.http.get<[Booking]>( API_URL + '/booking', {params}).toPromise();
     console.log(bookings);
-    bookings.map(booking => {
-      booking.attendees.map(attendee => {
-        booking.attendeeList = "";
-        booking.attendeeList = booking.attendeeList + attendee.firstName + ", ";
-      })
-
-      booking.attendeeList = booking.attendeeList.slice(0, -2);
-    });
+    
     return bookings;
   }
 
@@ -41,4 +42,9 @@ export class BookingService {
     return Observable.throw(error);
   }
 
+  private formatDate(date : Date) : Date {
+    console.log("date received");
+    console.log("formatted date", dateformat(date, 'isoDateTime'));
+    return new Date(dateformat(date, 'isoDateTime'));
+  }
 }

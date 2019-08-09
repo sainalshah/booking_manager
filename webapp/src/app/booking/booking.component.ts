@@ -59,10 +59,11 @@ export class BookingComponent implements OnInit {
       return bookings;
   }
 
-  addBooking(): void {
+  addBooking(bookingId: String): void {
+      console.log("bookingId:", bookingId);
     const dialogRef = this.dialog.open(AddBookingComponent, {
       width: '75%',
-      data: {groupId: this.groupId}
+      data: {groupId: this.groupId, bookingId: bookingId}
     });
 
     dialogRef.afterClosed().subscribe(isBookingAdded => {
@@ -73,5 +74,12 @@ export class BookingComponent implements OnInit {
       }
     });
   }
-
+  formatAttendees(booking: Booking): string{
+      let formattedList : string = "";
+      booking.attendees.map(attendee => {
+          formattedList = formattedList + attendee.firstName + ", ";
+      });
+      formattedList = formattedList.slice(0, -2);
+      return formattedList;
+  }
 }

@@ -5,6 +5,27 @@ var router = express.Router();
 var Booking = require('../models/booking');
 var logger = require('../LogsUtil').getLogger('bookingRouter');
 
+
+/* GET booking by booking id*/
+router.get('/byBookingId', function(req, res, next) {
+  logger.debug('getting bookings for bookingId',req.query.bookingId);
+  Booking
+  .findOne({
+    '_id': mongoose.Types.ObjectId(req.query.bookingId)
+  })
+  .populate('createdBy')
+  .populate('attendees')
+  .exec(function (err, bookings) {
+    if (err){
+      logger.debug("error getting booking", err);
+      res.json({msg : "error"});
+    } else {
+      logger.debug("returning bookings", bookings);
+      res.json(bookings);
+    }
+  });
+});
+
 /* GET bookings listing for a particular group. */
 router.get('/', function(req, res, next) {
   logger.debug('getting bookings for group',req.query.groupId );

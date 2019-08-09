@@ -17,10 +17,13 @@ export class AddBookingComponent implements OnInit {
   // attendees = new FormControl();
   groupId: string;
   members: User[];
+  bookingId: string;
   newBooking: Booking = new Booking();
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private groupService: GroupService, private bookingService: BookingService,
   private userService: UserService) {
     this.groupId = data.groupId;
+    this.bookingId = data.bookingId;
+    console.log("bookingId: ", this.bookingId);
   }
 
   async ngOnInit() {
@@ -29,6 +32,11 @@ export class AddBookingComponent implements OnInit {
     console.log("received group");
     this.members = group.members;
     console.log("members set", this.members);
+    console.log("bookingId: ", this.bookingId);
+    if (this.bookingId != null){
+        this.newBooking = await this.bookingService.getBooking(this.bookingId);
+        console.log("booking retrieved", this.newBooking);
+    }
   }
 
   addBooking(): void {
