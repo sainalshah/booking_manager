@@ -20,6 +20,12 @@ export class BookingService {
 
     const  params = new  HttpParams().set('bookingId', bookingId)
     let booking = await this.http.get<Booking>( API_URL + '/booking/byBookingId', {params}).toPromise();
+    console.log(booking);
+    for( const attendee of booking.attendees ){
+        booking.attendeeList = [];
+        console.log(attendee);
+        booking.attendeeList.push(attendee._id);
+    }
 
     return booking;
   }

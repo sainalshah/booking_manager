@@ -8,7 +8,7 @@ export class Booking {
   endTime: Date;
   venue: string;
   attendees: [User];
-  attendeeList: [string];
+  attendeeList: string[];
   group: string;
   active: boolean;
   attachementPath: string;
