@@ -26,6 +26,7 @@ import { BookingComponent } from './booking/booking.component';
 import { AddBookingComponent } from './add-booking/add-booking.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { AddGroupComponent } from './add-group/add-group.component';
 
 let config = new AuthServiceConfig([
   {
@@ -45,7 +46,8 @@ export function provideConfig() {
     PageNotFoundComponent,
     HomeComponent,
     BookingComponent,
-    AddBookingComponent
+    AddBookingComponent,
+    AddGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ export function provideConfig() {
     FormsModule
   ],
   entryComponents: [
-    AddBookingComponent
+    AddBookingComponent,
+    AddGroupComponent
   ],
   providers: [
     {

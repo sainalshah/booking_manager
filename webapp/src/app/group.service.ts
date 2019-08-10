@@ -17,14 +17,19 @@ export class GroupService {
 
   }
 
+  // API: POST /groups
+  public async saveGroup(group: Group) {
+    return await this.http.post<any>(API_URL + '/groups', group).toPromise();
+  }
+
   // API: GET /groups
   public async getAllGroups(userId: string): Promise<[Group]> {
     // will use this.http.get()
     const  params = new  HttpParams().set('userId', userId)
     let groups = await this.http.get<[Group]>( API_URL + '/groups', {params}).toPromise();
     groups.map(group => {
+      group.memberList = "";
       group.members.map(member => {
-        group.memberList = "";
         group.memberList = group.memberList + member.firstName + ", ";
       })
 

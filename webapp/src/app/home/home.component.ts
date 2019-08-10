@@ -3,6 +3,8 @@ import { GroupService } from '../group.service';
 import { Group } from '../group';
 import { UserService } from "../user.service";
 import { Router, NavigationExtras } from '@angular/router';
+import { AddGroupComponent } from '../add-group/add-group.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +17,13 @@ export class HomeComponent implements OnInit {
 
   groups: [Group];
 
-  constructor( private groupService: GroupService, private userService: UserService, private router: Router) { }
+  constructor( private groupService: GroupService, private dialog: MatDialog, private userService: UserService, private router: Router) { }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.loadGroups();
+  }
+
+  async loadGroups(){
     const user = this.userService.userBS.value;
     this.groups = await this.groupService.getAllGroups(user._id);
     console.log( "groups retrieved", this.groups);
@@ -31,6 +37,19 @@ export class HomeComponent implements OnInit {
       }
     }
     this.router.navigate(['booking'], navigationExtras);
+  }
+
+  showAddGroup(): void {
+    const dialogRef = this.dialog.open(AddGroupComponent, {
+      width: '75%'
+    });
+
+    dialogRef.afterClosed().subscribe(isGroupAdded => {
+      console.log('The dialog was closed', isGroupAdded);
+      if (isGroupAdded){
+        this.loadGroups();
+      }
+    });
   }
 
 }
