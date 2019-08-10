@@ -38,7 +38,7 @@ export class BookingService {
     return bookings;
   }
 
-  // API: POST /groups
+  // API: POST /booking
   public async saveBooking(booking: Booking) {
     return await this.http.post<any>(API_URL + '/booking', booking).toPromise();
   }

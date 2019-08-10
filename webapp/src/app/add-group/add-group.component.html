@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Add Group</h2>
+<div class="addGroup-container">
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="newGroup.name" required>
+  </mat-form-field>
+
+  <mat-form-field>
+  <mat-label>Members</mat-label>
+  <mat-select [(ngModel)]="newGroup.members" multiple>
+    <mat-option *ngFor="let user of availableUsers" [value]="user._id">{{user.firstName}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="addGroup()">Add Group</button>
+</mat-dialog-actions>

@@ -12,11 +12,11 @@ table {
     justify-content: center;
 }
 
-.addBooking-container {
+.addBooking-container, .addGroup-container {
   display: flex;
   flex-direction: column;
 }
 
-.addBooking-container mat-form-field {
+.addBooking-container, .addGroup-container mat-form-field {
   width: 100%;
 }

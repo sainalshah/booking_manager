@@ -8,7 +8,10 @@ var logger = require('../LogsUtil').getLogger('userRouter');
 router.get('/', function(req, res, next) {
   logger.debug('getting user details',req.query.email );
   User
-  .find({ email : req.query.email })
+  .find({ email : req.query.email }, 
+  {
+    authToken: 0, providerId: 0, provider: 0
+  })
   .exec(function (err, user) {
     if (err){
       logger.debug("error getting user", err);
@@ -19,6 +22,22 @@ router.get('/', function(req, res, next) {
   });
 });
 
+/* GET users listing. */
+router.get('/all', function(req, res, next) {
+  User
+  .find({}, 
+  {
+    authToken: 0, providerId: 0, provider: 0
+  })
+  .exec(function (err, users) {
+    if (err){
+      logger.debug("error getting user", err);
+      res.json({msg : "error"});
+    } else {
+      res.json(users);
+    }
+  });
+});
 
 router.post('/', function(req, res, next) {
   logger.debug("registering user", req.body)

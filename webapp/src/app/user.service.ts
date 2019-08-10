@@ -63,6 +63,14 @@ export class UserService {
     return await this.http.post<User>( API_URL + '/users', user).toPromise();
   }
 
+  // API: GET /users/all
+  public async getAllUsers(): Promise<[User]> {
+    // will use this.http.get()
+    const users = await this.http.get<[User]>( API_URL + '/users/all').toPromise();
+    console.log(users);
+    return users;
+  }
+
 }
 
 @Injectable()
