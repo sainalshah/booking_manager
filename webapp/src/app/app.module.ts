@@ -28,10 +28,12 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { AddGroupComponent } from './add-group/add-group.component';
 
+import * as keyConfig from '../assets/keys.json';
+
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("454779948179-9u9alokjcbvpdv0nokutm32v94g0rpf8.apps.googleusercontent.com")
+    provider: new GoogleLoginProvider(keyConfig.google_auth_provider)
   }
 ]);
 
