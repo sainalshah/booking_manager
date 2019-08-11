@@ -13,7 +13,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 })
 export class HomeComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'createdBy', 'members'];
+  displayedColumns: string[] = ['name', 'createdBy'];
 
   groups: [Group];
 

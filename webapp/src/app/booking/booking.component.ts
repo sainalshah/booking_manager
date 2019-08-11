@@ -16,7 +16,7 @@ import * as dateFormat from 'dateformat';
 })
 export class BookingComponent implements OnInit {
 
-  displayedColumns: string[] = ['datetime', 'venue', 'attendees', 'createdBy'];
+  displayedColumns: string[] = ['datetime', 'venue', 'attendees'];
 
   groupId: string;
   group: Group;
