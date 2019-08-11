@@ -21,8 +21,5 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="addBooking(row._id)"></tr>
     </table>
   </div>
-  <div class="row justify">
-    <button mat-button (click)="addBooking(null)">Add Booking</button>
-    <button mat-button>Add Member</button>
-  </div>
+  <button class="fab" mat-fab color="primary" (click)="addBooking(null)"><i class="material-icons">add</i></button>
 </div>

@@ -15,7 +15,5 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showBooking(row._id)"></tr>
     </table>
   </div>
-  <div class="row justify">
-    <button mat-button (click)="showAddGroup()">Add Group</button>
-  </div>
+  <button class="fab" mat-fab color="primary" (click)="showAddGroup()"><i class="material-icons">add</i></button>
 </div>
