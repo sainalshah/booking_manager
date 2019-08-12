@@ -14,14 +14,16 @@ import { UserService } from "../user.service";
 })
 export class AddBookingComponent implements OnInit {
 
-  // attendees = new FormControl();
   groupId: string;
   members: User[];
   bookingId: string;
+  isEditMode: boolean;
+  isAddMode: boolean = true;
   newBooking: Booking = new Booking();
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private groupService: GroupService, private bookingService: BookingService,
   private userService: UserService) {
     this.groupId = data.groupId;
+    this.isEditMode = data.editMode;
     this.bookingId = data.bookingId;
     console.log("bookingId: ", this.bookingId);
   }
@@ -34,6 +36,7 @@ export class AddBookingComponent implements OnInit {
     console.log("members set", this.members);
     console.log("bookingId: ", this.bookingId);
     if (this.bookingId != null){
+        this.isAddMode = false;
         this.newBooking = await this.bookingService.getBooking(this.bookingId);
         console.log("booking retrieved", this.newBooking);
     }

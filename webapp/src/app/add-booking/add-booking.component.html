@@ -1,29 +1,31 @@
-<h2 mat-dialog-title>Add Booking Details</h2>
+<h2 *ngIf="isEditMode && isAddMode" mat-dialog-title>Add Booking Details</h2>
+<h2 *ngIf="isEditMode && !isAddMode" mat-dialog-title>Update Booking Details</h2>
+<h2 *ngIf="!isEditMode" mat-dialog-title>View Booking Details</h2>
 <div class="addBooking-container">
 
   <mat-form-field>
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="newBooking.name" required>
+    <input matInput [(ngModel)]="newBooking.name" [disabled]="!isEditMode" [disabled]="!isEditMode" required>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Venue</mat-label>
-    <input matInput [(ngModel)]="newBooking.venue" required>
+    <input matInput [(ngModel)]="newBooking.venue" [disabled]="!isEditMode" required>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Start Time</mat-label>
-    <input matInput [(ngModel)]="newBooking.startTime" type="datetime" required>
+    <input matInput [(ngModel)]="newBooking.startTime" type="datetime" [disabled]="!isEditMode" required>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>End Time</mat-label>
-    <input matInput [(ngModel)]="newBooking.endTime" type="datetime" required>
+    <input matInput [(ngModel)]="newBooking.endTime" type="datetime" [disabled]="!isEditMode" required>
   </mat-form-field>
 
   <mat-form-field>
   <mat-label>Attendees</mat-label>
-  <mat-select [(ngModel)]="newBooking.attendeeList" multiple>
+  <mat-select [(ngModel)]="newBooking.attendeeList" multiple [disabled]="!isEditMode" required>
     <mat-option *ngFor="let member of members" [value]="member._id">{{member.firstName}}</mat-option>
   </mat-select>
 </mat-form-field>
@@ -31,6 +33,8 @@
 </div>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="addBooking()">Add Booking</button>
+  <button mat-button mat-dialog-close *ngIf="isEditMode">Cancel</button>
+  <button mat-button mat-dialog-close *ngIf="!isEditMode">Close</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="addBooking()" *ngIf="isEditMode && isAddMode">Add Booking</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="addBooking()" *ngIf="isEditMode && !isAddMode">Update Booking</button>
 </mat-dialog-actions>

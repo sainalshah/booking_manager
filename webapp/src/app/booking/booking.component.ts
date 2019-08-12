@@ -16,7 +16,7 @@ import * as dateFormat from 'dateformat';
 })
 export class BookingComponent implements OnInit {
 
-  displayedColumns: string[] = ['datetime', 'venue', 'attendees'];
+  displayedColumns: string[] = ['datetime', 'venue', 'action'];
 
   groupId: string;
   group: Group;
@@ -59,11 +59,11 @@ export class BookingComponent implements OnInit {
       return bookings;
   }
 
-  addBooking(bookingId: String): void {
+  addBooking(bookingId: String, editMode: boolean): void {
       console.log("bookingId:", bookingId);
     const dialogRef = this.dialog.open(AddBookingComponent, {
       width: '75%',
-      data: {groupId: this.groupId, bookingId: bookingId}
+      data: {groupId: this.groupId, bookingId: bookingId, editMode: editMode}
     });
 
     dialogRef.afterClosed().subscribe(isBookingAdded => {
